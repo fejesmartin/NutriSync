@@ -1,5 +1,5 @@
 # NutriSync
-## Welcome to NutriSync – your ultimate health and wellness companion, powered by cutting-edge technologies. We've harnessed the capabilities of ASP.NET Core, React, and Typescript to bring you a feature-rich and intuitive experience.
+### Welcome to NutriSync – your ultimate health and wellness companion, powered by cutting-edge technologies. We've harnessed the capabilities of ASP.NET Core, React, and Typescript to bring you a feature-rich and intuitive experience.
 
 ## Key Features
 ### 1. User-Friendly Authentication:
