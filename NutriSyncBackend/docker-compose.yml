@@ -1,0 +1,28 @@
+﻿version: '3.8'
+services:
+
+  nutrisync-db:
+    image: mcr.microsoft.com/mssql/server
+    environment:
+      ACCEPT_EULA: "Y"
+      PASSWORD: ${DATABASE_PASSWORD}
+    ports:
+      - "1433:1433"
+  
+  nutrisync-backend:
+    image: nutrisync-backend:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "9000:80"
+    depends_on:
+      - nutrisync-db
+    environment:
+      ASPNETCORE_CONNECTIONSTRING: ${ASPNETCORE_CONNECTIONSTRING}
+      NUTRISYNC_ADMINUSER_EMAIL: ${NUTRISYNC_ADMINUSER_EMAIL}
+      NUTRISYNC_ADMINUSER_PASSWORD: ${NUTRISYNC_ADMINUSER_PASSWORD}
+      NUTRISYNC_ADMINUSER_USERNAME: ${NUTRISYNC_ADMINUSER_USERNAME}
+      NUTRISYNC_JWT_ISSUER_SIGNING_KEY: ${NUTRISYNC_JWT_ISSUER_SIGNING_KEY}
+      NUTRISYNC_JWT_VALID_AUDIENCE: ${NUTRISYNC_JWT_VALID_AUDIENCE}
+      NUTRISYNC_JWT_VALID_ISSUER: ${NUTRISYNC_JWT_VALID_ISSUER}
