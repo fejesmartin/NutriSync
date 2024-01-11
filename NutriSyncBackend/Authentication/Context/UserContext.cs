@@ -14,13 +14,7 @@ public class UserContext : IdentityDbContext<IdentityUser, IdentityRole, string>
     public UserContext(DbContextOptions<UserContext> options)
         : base(options)
     {
-        // Check and create the database and tables if they don't exist
-        var databaseCreator = Database.GetService<IDatabaseCreator>() as RelationalDatabaseCreator;
-        if (databaseCreator != null)
-        {
-            if (!databaseCreator.CanConnect()) databaseCreator.Create();
-            if (!databaseCreator.HasTables()) databaseCreator.CreateTables();
-        }
+       if(Database.IsRelational()) Database.Migrate();
     }
 
     // Configures the database connection based on the environment
@@ -43,7 +37,6 @@ public class UserContext : IdentityDbContext<IdentityUser, IdentityRole, string>
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
-        // Additional model configurations can be added if needed
     }
 }
 
