@@ -25,10 +25,10 @@ jobs:
           dotnet-version: 7.0.x
 
       - name: Restore dependencies
-        run: dotnet restore NutriSyncBackend/NutriSyncBackend.sln
+        run: dotnet restore NutriSyncBackend/NutriSyncBackend.csproj
 
       - name: Build
         run: dotnet build NutriSyncBackend/NutriSyncBackend.csproj --no-restore
 
       - name: Test
-        run: dotnet test NutriSyncBackend/NutriSyncBackend.sln --no-restore --verbosity normal
+        run: dotnet test NutriSyncBackend/NutriSyncBackend.csproj --no-restore --verbosity normal
