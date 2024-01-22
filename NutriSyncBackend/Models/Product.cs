@@ -6,4 +6,9 @@ public class Product
     public string ProductName { get; set; }
     public string Description { get; set; }
     public decimal Price { get; set; }
+    // Foreign key
+    public int UserId { get; set; }
+
+    // Navigation property
+    public User User { get; set; }
 }
