@@ -4,13 +4,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using NutriSyncBackend.Authentication.Context;
+using NutriSyncBackend.Authentication;
+
 
 #nullable disable
 
 namespace NutriSyncBackend.Migrations
 {
-    [DbContext(typeof(UserContext))]
+    [DbContext(typeof(NutriSyncDBContext))]
     partial class UserContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

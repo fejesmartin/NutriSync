@@ -5,13 +5,13 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using NutriSyncBackend.Authentication.Context;
+using NutriSyncBackend.Authentication;
 
 #nullable disable
 
 namespace NutriSyncBackend.Migrations
 {
-    [DbContext(typeof(UserContext))]
+    [DbContext(typeof(NutriSyncDBContext))]
     [Migration("20240111164546_InitialCreate")]
     partial class InitialCreate
     {
