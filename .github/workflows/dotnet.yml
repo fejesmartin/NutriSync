@@ -12,12 +12,20 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+
+      - name: Check Directory Contents
+        run: |
+          echo "Current directory: $(pwd)"
+          echo "Directory contents:"
+          ls -R
+
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: 7.0.x
+
       - name: Restore dependencies
-        run: dotnet restore ./NutriSyncBackend.sln
+        run: dotnet restore NutriSyncBackend.sln
       - name: Build
         run: dotnet build NutriSyncBackend/NutriSyncBackend.csproj --no-restore
       - name: Test
