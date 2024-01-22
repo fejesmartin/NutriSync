@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using NutriSyncBackend.Authentication;
-using NutriSyncBackend.Authentication.Context;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -61,7 +61,7 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 // Add DbContext
-builder.Services.AddDbContext<UserContext>();
+builder.Services.AddDbContext<NutriSyncDBContext>();
 
 // Add authentication and JWT Bearer options
 builder.Services.AddAuthentication(options =>
@@ -93,7 +93,7 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
         options.Password.RequireUppercase = false;
         options.Password.RequireLowercase = false;
     })
-    .AddEntityFrameworkStores<UserContext>()
+    .AddEntityFrameworkStores<NutriSyncDBContext>()
     .AddDefaultTokenProviders();
 
 
