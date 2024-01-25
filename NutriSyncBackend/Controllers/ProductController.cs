@@ -13,7 +13,8 @@ public class ProductController: ControllerBase
     {
         _planRepository = planRepository;
     }
-
+    
+    [HttpGet("GetAllProducts")]
     public IActionResult GetAllProducts()
     {
         var products = _planRepository.GetAll();
