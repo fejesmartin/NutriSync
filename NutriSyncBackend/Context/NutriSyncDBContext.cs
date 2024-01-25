@@ -18,6 +18,7 @@ using Microsoft.EntityFrameworkCore;
         // Configure the database connection based on the environment
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
+            DotNetEnv.Env.Load();
             if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Testing")
             {
                 // Use an in-memory database for testing
@@ -26,8 +27,8 @@ using Microsoft.EntityFrameworkCore;
             else
             {
                 // Use SQL Server with the provided connection string
-                options.UseSqlServer(
-                    "Server=localhost,1433;Database=NutriSyncDB;User Id=sa;Password=HerkuleS1998;TrustServerCertificate=true;");
+                options.UseSqlServer("Server=nutrisync-db,1433;Database=NutriSyncDB;User Id=sa;Password=HerkuleS1998;TrustServerCertificate=true;"
+                    );
             }
         }
 
@@ -71,14 +72,7 @@ using Microsoft.EntityFrameworkCore;
             modelBuilder.Entity<Product>()
                 .Property(p => p.Price)
                 .IsRequired();
-
-            modelBuilder.Entity<Product>()
-                .Property(p => p.ImageData)
-                .IsRequired();
-
-            modelBuilder.Entity<Product>()
-                .Property(p => p.ImageMimeType)
-                .IsRequired();
+            
 
             // Relationships
             modelBuilder.Entity<Product>()
@@ -86,15 +80,15 @@ using Microsoft.EntityFrameworkCore;
                 .WithMany(u => u.BoughtProducts)
                 .HasForeignKey(p => p.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
-            
-            #region SeedPlans
 
-            modelBuilder.Entity<Plan>().HasData(
-                new Plan { PlanId = 1, PlanName = "Standard Plan", Description = "Basic weight loss plan", UserId = "1"}
+            #region SeedInitialUser
+
+            
+            modelBuilder.Entity<IdentityUser>().HasData(
+                new IdentityUser { Id = "1", UserName = "example@example.com", Email = "example@example.com" }
             );
 
             #endregion
-            
             
             #region SeedProducts
 
@@ -102,50 +96,27 @@ using Microsoft.EntityFrameworkCore;
                 new Product
                 {
                     ProductId = 1, ProductName = "Dumbbells", Description = "Set of adjustable dumbbells for strength training",
-                    Price = 49.99m, ImageData = GetImageBytes("dumbbell.png"), ImageMimeType = "image/png", UserId = "1"
+                    Price = 49.99m, UserId = "1"
                 },
                 new Product
                 {
                     ProductId = 2, ProductName = "Exercise Mat", Description = "High-density foam mat for yoga and floor exercises",
-                    Price = 19.99m, ImageData = GetImageBytes("mat.png"), ImageMimeType = "image/png", UserId = "1"
+                    Price = 19.99m, UserId = "1"
                 },
                 new Product
                 {
                     ProductId = 3, ProductName = "Blender", Description = "High-speed blender for making smoothies and shakes",
-                    Price = 69.99m, ImageData = GetImageBytes("blender.png"), ImageMimeType = "image/png", UserId = "1"
+                    Price = 69.99m, UserId = "1"
                 },
                 new Product
                 {
                     ProductId = 4, ProductName = "Meal Prep Containers", Description = "Set of reusable containers for meal prepping",
-                    Price = 14.99m, ImageData = GetImageBytes("containers.png"), ImageMimeType = "image/png", UserId = "1"
+                    Price = 14.99m, UserId = "1"
                 }
             );
 
             #endregion
-
-           
-        }
-        
-        private static byte[] GetImageBytes(string imageName)
-        {
-            DotNetEnv.Env.Load();
-            var pathToImage = Environment.GetEnvironmentVariable("PATH_TO_IMAGE");
-    
-            if (string.IsNullOrEmpty(pathToImage))
-            {
-                // Handle the case where PATH_TO_IMAGE is not set
-                throw new InvalidOperationException("PATH_TO_IMAGE environment variable is not set.");
-            }
-    
-            var imagePath = Path.Combine(pathToImage, imageName);
-    
-            if (!File.Exists(imagePath))
-            {
-                // Handle the case where the image file does not exist
-                throw new FileNotFoundException($"Image file '{imageName}' not found at path: '{imagePath}'.");
-            }
-    
-            return File.ReadAllBytes(imagePath);
+            
         }
 
     }

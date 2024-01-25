@@ -1,0 +1,10 @@
+/* Home.css */
+.home-carousel-container {
+    height: 100%;
+  }
+  
+  .home-carousel-image {
+    max-height: 60vh; /* Adjust the height as needed */
+    object-fit: cover; /* Maintain aspect ratio and cover the entire container */
+  }
+  

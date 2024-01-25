@@ -12,16 +12,26 @@
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
-      "applicationUrl": "http://localhost:5103",
+      "launchUrl": "swagger",
+      "applicationUrl": "http://localhost:5057",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_CONNECTIONSTRING": "Server=localhost,1433;Database=NutriSyncDB;User Id=sa;Password=HerkuleS1998;TrustServerCertificate=true;",
+        "NUTRISYNC_ADMINUSER_EMAIL":"admin@admin.com",
+        "NUTRISYNC_ADMINUSER_PASSWORD":"admin123",
+        "NUTRISYNC_ADMINUSER_USERNAME":"admin",
+        "NUTRISYNC_JWT_ISSUER_SIGNING_KEY":"MartinIsTheKingOfARAM123",
+        "NUTRISYNC_JWT_VALID_AUDIENCE":"nutrisyncusers",
+        "NUTRISYNC_JWT_VALID_ISSUER":"nutrisyncprovider",
+        "DATABASE_PASSWORD":"HerkuleS1998",
+        "PATH_TO_IMAGE":"C:/Users/Martin/Desktop/NutriSyncStuff"
       }
     },
     "https": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
-      "applicationUrl": "https://localhost:7052;http://localhost:5103",
+      "applicationUrl": "https://localhost:7052;http://localhost:5057",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

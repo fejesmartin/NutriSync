@@ -1,12 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using NutriSyncBackend.Models;
 
 namespace NutriSyncBackend.Context.Repositories;
 
-public class ProductRespository: IRepository<Product>
+public class ProductRepository: IRepository<Product>
 {
     public NutriSyncDBContext _dbContext;
-    public ProductRespository(NutriSyncDBContext dbContext)
+    public ProductRepository(NutriSyncDBContext dbContext)
     {
         _dbContext = dbContext;
     }
