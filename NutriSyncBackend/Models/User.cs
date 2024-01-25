@@ -1,14 +1,12 @@
-﻿using System.Text.Json.Serialization;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 
-namespace NutriSyncBackend.Models;
-
-public class User: IdentityUser
+public class User : IdentityUser<string>
 {
-    public string UserId { get; set; } 
-    public string UserName { get; set; }
-    public byte[]? ProfilePicture { get; set; }
+    public byte[]? ProfilePictureData { get; set; }
+    public string? ProfileImageMimeType { get; set; }
     public string DisplayName { get; set; }
+
+    // Navigation properties
     public List<Product> BoughtProducts { get; set; }
     public List<Plan> Plans { get; set; }
 }
