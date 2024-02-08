@@ -1,4 +1,4 @@
-﻿{
+{
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
@@ -16,7 +16,7 @@
       "applicationUrl": "http://localhost:5057",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "ASPNETCORE_CONNECTIONSTRING": "Server=localhost,1433;Database=NutriSyncDB;User Id=sa;Password=HerkuleS1998;TrustServerCertificate=true;",
+        "ASPNETCORE_CONNECTIONSTRING": "Server=localhost,1433;Database=NutriSyncDB;User Id=sa;Password=HerkuleS1998;TrustServerCertificate=true;Encrypt=False",
         "NUTRISYNC_ADMINUSER_EMAIL":"admin@admin.com",
         "NUTRISYNC_ADMINUSER_PASSWORD":"admin123",
         "NUTRISYNC_ADMINUSER_USERNAME":"admin",
