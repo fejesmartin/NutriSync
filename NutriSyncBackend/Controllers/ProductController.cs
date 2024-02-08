@@ -1,5 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using NutriSyncBackend.Context.Repositories;
+using NutriSyncBackend.Models;
 
 namespace NutriSyncBackend.Controllers;
 
@@ -7,17 +8,17 @@ namespace NutriSyncBackend.Controllers;
 [Route("[controller]")]
 public class ProductController: ControllerBase
 {
-    private readonly PlanRepository _planRepository;
+    private readonly IRepository<Product> _productRepository;
     
-    public ProductController(PlanRepository planRepository)
+    public ProductController(IRepository<Product> productRepository)
     {
-        _planRepository = planRepository;
+        _productRepository = productRepository;
     }
     
     [HttpGet("GetAllProducts")]
     public IActionResult GetAllProducts()
     {
-        var products = _planRepository.GetAll();
+        var products = _productRepository.GetAll();
         return Ok(products);
     }
 }

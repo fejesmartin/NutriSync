@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using NutriSyncBackend.Models;
 
 namespace NutriSyncBackend.Context.Repositories;
 
