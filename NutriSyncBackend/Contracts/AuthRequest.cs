@@ -1,3 +1,3 @@
-﻿namespace NutriSyncBackend.Contracts;
+namespace NutriSyncBackend.Contracts;
 
 public record AuthRequest(string Email, string Password);

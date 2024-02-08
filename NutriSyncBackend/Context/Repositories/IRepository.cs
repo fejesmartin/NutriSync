@@ -1,4 +1,4 @@
-﻿namespace NutriSyncBackend.Context.Repositories;
+namespace NutriSyncBackend.Context.Repositories;
 
 public interface IRepository<T> where T : class
 {

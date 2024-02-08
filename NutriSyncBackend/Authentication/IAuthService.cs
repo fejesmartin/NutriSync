@@ -1,4 +1,4 @@
-﻿namespace NutriSyncBackend.Authentication;
+namespace NutriSyncBackend.Authentication;
 
 public interface IAuthService
 {

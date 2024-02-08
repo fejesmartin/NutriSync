@@ -1,5 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity;
 
+namespace NutriSyncBackend.Models;
 public class User : IdentityUser<string>
 {
     public byte[]? ProfilePictureData { get; set; }

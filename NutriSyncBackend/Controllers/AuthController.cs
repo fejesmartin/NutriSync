@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using NutriSyncBackend.Authentication;
 using NutriSyncBackend.Contracts;
 
@@ -20,7 +20,7 @@ public class AuthController: ControllerBase
     {
         if (!ModelState.IsValid)
         {
-            return BadRequest(ModelState);
+            return BadRequest(ModelState.ValidationState);
         }
         var result = await _authService.RegisterAsync(request.Email, request.Username, request.Password, "User");
 
