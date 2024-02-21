@@ -6,6 +6,7 @@ import Products from './Components/Products';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import RegisterComponent from './Components/RegisterComponent';
 import LoginComponent from './Components/LoginComponent';
+import CalorieCounter from './Components/CalorieCounter';
 
 function App() {
 
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: "/login",
         element: <LoginComponent />
+      },
+      {
+        path: "/calories",
+        element: <CalorieCounter />
       }
     ]
   }
