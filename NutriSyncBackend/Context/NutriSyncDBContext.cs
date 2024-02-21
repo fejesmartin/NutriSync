@@ -8,7 +8,8 @@ public class NutriSyncDBContext : IdentityDbContext<IdentityUser, IdentityRole, 
     public DbSet<Plan> Plans { get; set; }
     public DbSet<Product> Products { get; set; }
 
-    public NutriSyncDBContext()
+    public NutriSyncDBContext(DbContextOptions<NutriSyncDBContext> options)
+        : base(options)
     {
         if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") != "Test") Database.Migrate();
         else Database.EnsureCreated();
