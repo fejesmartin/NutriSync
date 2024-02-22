@@ -7,6 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import RegisterComponent from './Components/RegisterComponent';
 import LoginComponent from './Components/LoginComponent';
 import CalorieCounter from './Components/CalorieCounter';
+import MyProfile from './Components/MyProfile';
 
 function App() {
 
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
       {
         path: "/calories",
         element: <CalorieCounter />
+      },
+      {
+        path: "/myprofile",
+        element: <MyProfile />
       }
     ]
   }
