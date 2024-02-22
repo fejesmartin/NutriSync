@@ -28,10 +28,9 @@ const LoginComponent: React.FC = () => {
   const loginUser = async (userData: LoginFormData) => {
     try {
       const response = await axios.post(`${backendUrl}/Auth/Login`, userData);
-     
+
       if (response.status == 200) {
         const responseData = response.data;
-
 
         // Create a new User object with the extracted username, email, and token
         const profile = new User(
@@ -62,9 +61,9 @@ const LoginComponent: React.FC = () => {
   };
 
   return (
-    <Container>
-      <h2>Login</h2>
-      <Form onSubmit={handleSubmit}>
+    <Container className="d-flex justify-content-center align-items-center ">
+      <Form className="w-50" onSubmit={handleSubmit}>
+        <h2 className="mb-3 text-center">Login</h2>
         <Form.Group className="mb-3" controlId="formEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control
@@ -89,9 +88,11 @@ const LoginComponent: React.FC = () => {
           />
         </Form.Group>
 
-        <Button variant="primary" type="submit">
-          Login
-        </Button>
+        <div className="text-center">
+          <Button variant="primary" type="submit">
+            Login
+          </Button>
+        </div>
       </Form>
     </Container>
   );

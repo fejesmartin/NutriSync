@@ -5,7 +5,6 @@ import { Form, Button, Container, Alert } from "react-bootstrap";
 import { RegistrationFormData } from "../Models/RegistrationFormData";
 import { useNavigate } from "react-router-dom";
 
-
 const RegisterComponent: React.FC = () => {
   const [formData, setFormData] = useState<RegistrationFormData>({
     username: "",
@@ -26,7 +25,7 @@ const RegisterComponent: React.FC = () => {
       if (response.status == 201) {
         setSuccessful(true);
         setTimeout(() => {
-            navigate("/login");
+          navigate("/login");
         }, 5000);
       }
     } catch (error) {
@@ -48,8 +47,9 @@ const RegisterComponent: React.FC = () => {
   };
 
   return (
-    <Container>
-      <Form onSubmit={handleSubmit}>
+    <Container className="d-flex justify-content-center align-items-center ">
+      <Form className="w-50" onSubmit={handleSubmit}>
+        <h2 className="mb-3 text-center">Register</h2>
         <Form.Group className="mb-3" controlId="formUsername">
           <Form.Label>Username</Form.Label>
           <Form.Control
@@ -63,7 +63,7 @@ const RegisterComponent: React.FC = () => {
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formEmail">
-          <Form.Label>E-mail</Form.Label>
+          <Form.Label>Email address</Form.Label>
           <Form.Control
             type="email"
             placeholder="example@example.com"
@@ -85,10 +85,11 @@ const RegisterComponent: React.FC = () => {
             required
           />
         </Form.Group>
-
-        <Button variant="primary" type="submit">
-          Register
-        </Button>
+        <div className="text-center">
+          <Button variant="primary" type="submit">
+            Register
+          </Button>
+        </div>
       </Form>
       {successful && (
         <Alert variant="success" className="mt-3">
