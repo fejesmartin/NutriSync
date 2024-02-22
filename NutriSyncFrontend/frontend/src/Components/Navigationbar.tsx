@@ -39,11 +39,14 @@ const Navigationbar: React.FC = () => {
                 Products
               </Nav.Link>
               <Nav.Link href="#workout">Workout</Nav.Link>
+              <Nav.Link href="#healthyfoods">Healthy Foods</Nav.Link>
+              <Nav.Link href="#calorie" onClick={()=> navigate("/calories")}>Calorie Counter</Nav.Link>
+              <Nav.Link href="#plans">About Us</Nav.Link>
             </Nav>
             <Nav>
               {userProfile != undefined ? (
                 <NavDropdown
-                  title={userProfile ? userProfile.userName : "gfwg"}
+                  title={userProfile && userProfile.userName}
                   id="collapsible-nav-dropdown"
                 >
                   <NavDropdown.Item>Profile</NavDropdown.Item>
@@ -53,7 +56,7 @@ const Navigationbar: React.FC = () => {
                       localStorage.removeItem("profile");
                       setLoggedOut(true);
                       setTimeout(() => {
-                        navigate("/login")
+                        navigate("/login");
                         setLoggedOut(false);
                       }, 5000);
                     }}
