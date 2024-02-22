@@ -7,11 +7,15 @@ import { useNavigate } from "react-router-dom";
 import { User } from "../Models/User";
 import { jwtDecode } from "jwt-decode";
 import { Alert } from "react-bootstrap";
+import { Avatar } from "@mui/material";
+import { getUserProfileFromLocalStorage } from '../Utils/getUserProfileFromLocalStorage';
+
 
 const Navigationbar: React.FC = () => {
   const [userProfile, setUserProfile] = useState<User | null>(null);
   const [loggedOut, setLoggedOut] = useState<boolean>(false);
   const navigate = useNavigate();
+
 
   useEffect(() => {
     const userProfileString: string | null = localStorage.getItem("profile");
@@ -19,7 +23,7 @@ const Navigationbar: React.FC = () => {
     if (userProfileString) {
       const userProfileData: User = JSON.parse(userProfileString);
       setUserProfile(userProfileData);
-      console.log(userProfileData.userName);
+      console.log(userProfileData && userProfileData.profilePictureUrl);
     } else {
       setUserProfile(null);
     }
@@ -45,11 +49,14 @@ const Navigationbar: React.FC = () => {
             </Nav>
             <Nav>
               {userProfile != undefined ? (
+                <>
+                <Avatar src={`${userProfile && userProfile.profilePictureUrl}`}/>
                 <NavDropdown
                   title={userProfile && userProfile.userName}
                   id="collapsible-nav-dropdown"
+                  style={{zIndex: 10000}}
                 >
-                  <NavDropdown.Item>Profile</NavDropdown.Item>
+                  <NavDropdown.Item onClick={()=> navigate("/myprofile")}>Profile</NavDropdown.Item>
                   <NavDropdown.Item>Settings</NavDropdown.Item>
                   <NavDropdown.Item
                     onClick={() => {
@@ -65,6 +72,7 @@ const Navigationbar: React.FC = () => {
                   </NavDropdown.Item>
                   <NavDropdown.Divider />
                 </NavDropdown>
+                </>
               ) : (
                 <>
                   <Nav.Link onClick={() => navigate("/login")}>Login</Nav.Link>
