@@ -21,4 +21,18 @@ public class ProductController: ControllerBase
         var products = _productRepository.GetAll();
         return Ok(products);
     }
+
+    [HttpPost("CreateProduct")]
+    public IActionResult Create([FromBody] Product product)
+    {
+        _productRepository.Create(product);
+        return Ok(_productRepository.GetById(product.ProductId));
+    }
+
+    [HttpGet("Get/{id}")]
+    public IActionResult GetById(int id)
+    {
+        var product = _productRepository.GetById(id);
+        return Ok(product);
+    }
 }
