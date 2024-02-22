@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using NutriSyncBackend.Context.Repositories;
 using NutriSyncBackend.Models;
 
@@ -16,7 +17,7 @@ public class CrudTests
         Environment.SetEnvironmentVariable("ASPNETCORE_ISSUERSIGNINGKEY", "FakeSigningKey11");
         Environment.SetEnvironmentVariable("ASPNETCORE_VALIDAUDIENCE", "FakeAudience");
         Environment.SetEnvironmentVariable("ASPNETCORE_VALIDISSUER", "FakeIssuer");
-        _dbContext = new NutriSyncDBContext();
+        _dbContext = new NutriSyncDBContext(new DbContextOptions<NutriSyncDBContext>());
        
     }
 
