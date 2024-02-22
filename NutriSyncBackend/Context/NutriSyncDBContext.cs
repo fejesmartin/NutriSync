@@ -11,8 +11,17 @@ public class NutriSyncDBContext : IdentityDbContext<IdentityUser, IdentityRole, 
     public NutriSyncDBContext(DbContextOptions<NutriSyncDBContext> options)
         : base(options)
     {
-        if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") != "Test") Database.Migrate();
-        else Database.EnsureCreated();
+        if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") != "Test")
+        {
+            if (Database.ProviderName != "Microsoft.EntityFrameworkCore.InMemory")
+            {
+                Database.Migrate();
+            }
+            else
+            {
+                Database.EnsureCreated();
+            }
+        }
     }
     
     protected override void OnConfiguring(DbContextOptionsBuilder options)
