@@ -27,5 +27,16 @@ services:
       NUTRISYNC_JWT_VALID_AUDIENCE: ${NUTRISYNC_JWT_VALID_AUDIENCE}
       NUTRISYNC_JWT_VALID_ISSUER: ${NUTRISYNC_JWT_VALID_ISSUER}
 
+  nutrisync-frontend:
+    image: nutrisync-frontend:latest
+    build:
+      context: ../NutriSyncFrontend/frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - nutrisync-backend
+
 networks:
   nutrisync-backend-network:
+
