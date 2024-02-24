@@ -1,45 +1,96 @@
 using Microsoft.EntityFrameworkCore;
 using NutriSyncBackend.Models;
+using NutriSyncBackend.Context.Repositories;
 
-namespace NutriSyncBackend.Context.Repositories;
-
-public class ProductRepository: IRepository<Product>
+public class ProductRepository : IRepository<Product>
 {
-    public NutriSyncDBContext _dbContext;
-    public ProductRepository(NutriSyncDBContext dbContext)
+    private readonly NutriSyncDBContext _dbContext;
+    private readonly ILogger _logger;
+
+    public ProductRepository(NutriSyncDBContext dbContext, ILogger logger)
     {
         _dbContext = dbContext;
+        _logger = logger;
     }
-    
+
     public IEnumerable<Product> GetAll()
     {
-        return _dbContext.Products.ToList();
+        try
+        {
+            _logger.LogInformation("Getting all products from the database.");
+            return _dbContext.Products.ToList();
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error occurred while retrieving all products.");
+            throw;
+        }
     }
 
     public Product? GetById(int id)
     {
-        return _dbContext.Products.Find(id);
+        try
+        {
+            _logger.LogInformation("Getting product by ID: {ProductId}", id);
+            return _dbContext.Products.Find(id);
+
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error occurred while retrieving all products.");
+            throw;
+        }
     }
 
     public void Create(Product obj)
     {
-        _dbContext.Products.Add(obj);
-        _dbContext.SaveChanges();
+        try
+        {
+            _logger.LogInformation("Creating new product: {@Product}", obj);
+            _dbContext.Products.Add(obj);
+            _dbContext.SaveChanges();
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error occurred while retrieving all products.");
+            throw;
+        }
+       
     }
 
     public void Update(Product obj)
     {
-        _dbContext.Entry(obj).State = EntityState.Modified;
-        _dbContext.SaveChanges();
+        try
+        {
+            _logger.LogInformation("Updating product: {@Product}", obj);
+            _dbContext.Entry(obj).State = EntityState.Modified;
+            _dbContext.SaveChanges();
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error occurred while retrieving all products.");
+            throw;
+        }
+       
     }
 
     public void Delete(int id)
     {
-        var product = _dbContext.Products.Find(id);
-        if (product != null)
+        try
         {
-            _dbContext.Products.Remove(product);
-            _dbContext.SaveChanges();
+            _logger.LogInformation("Deleting product with ID: {ProductId}", id);
+            var product = _dbContext.Products.Find(id);
+            if (product != null)
+            {
+                _dbContext.Products.Remove(product);
+                _dbContext.SaveChanges();
+            }
         }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error occurred while retrieving all products.");
+            throw;
+        }
+       
     }
 }
