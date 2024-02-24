@@ -22,7 +22,7 @@ const RegisterComponent: React.FC = () => {
       );
       console.log(response.data);
 
-      if (response.status == 201) {
+      if (response.status === 201) {
         setSuccessful(true);
         setTimeout(() => {
           navigate("/login");
@@ -47,6 +47,7 @@ const RegisterComponent: React.FC = () => {
   };
 
   return (
+    <>
     <Container className="d-flex justify-content-center align-items-center ">
       <Form className="w-50" onSubmit={handleSubmit}>
         <h2 className="mb-3 text-center">Register</h2>
@@ -91,12 +92,13 @@ const RegisterComponent: React.FC = () => {
           </Button>
         </div>
       </Form>
+    </Container>
       {successful && (
-        <Alert variant="success" className="mt-3">
+        <Alert variant="success">
           Registration successful! Redirecting to Login page in 5 seconds.
         </Alert>
       )}
-    </Container>
+    </>
   );
 };
 
