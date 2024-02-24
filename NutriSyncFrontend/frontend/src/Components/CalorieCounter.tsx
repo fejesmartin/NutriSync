@@ -68,7 +68,7 @@ const CalorieCounter: React.FC = () => {
       </Form>
       {calories && (
         <div>
-          <p>Calories for {itemName}: {calories}</p>
+          <p>Calories for {itemName}: {calories} cal</p>
         </div>
       )}
     </div>

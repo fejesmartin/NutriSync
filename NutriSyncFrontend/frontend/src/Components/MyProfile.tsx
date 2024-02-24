@@ -1,60 +1,70 @@
-import AspectRatio from '@mui/joy/AspectRatio';
-import Box from '@mui/joy/Box';
-import Button from '@mui/joy/Button';
-import Divider from '@mui/joy/Divider';
-import FormControl from '@mui/joy/FormControl';
-import FormLabel from '@mui/joy/FormLabel';
-import FormHelperText from '@mui/joy/FormHelperText';
-import Input from '@mui/joy/Input';
-import IconButton from '@mui/joy/IconButton';
-import Textarea from '@mui/joy/Textarea';
-import Stack from '@mui/joy/Stack';
-import Typography from '@mui/joy/Typography';
-import Tabs from '@mui/joy/Tabs';
-import TabList from '@mui/joy/TabList';
-import Tab, { tabClasses } from '@mui/joy/Tab';
-import Breadcrumbs from '@mui/joy/Breadcrumbs';
-import Link from '@mui/joy/Link';
-import Card from '@mui/joy/Card';
-import CardActions from '@mui/joy/CardActions';
-import CardOverflow from '@mui/joy/CardOverflow';
-import Alert from '@mui/joy/Alert';
+import AspectRatio from "@mui/joy/AspectRatio";
+import Box from "@mui/joy/Box";
+import Button from "@mui/joy/Button";
+import Divider from "@mui/joy/Divider";
+import FormControl from "@mui/joy/FormControl";
+import FormLabel from "@mui/joy/FormLabel";
+import FormHelperText from "@mui/joy/FormHelperText";
+import Input from "@mui/joy/Input";
+import IconButton from "@mui/joy/IconButton";
+import Textarea from "@mui/joy/Textarea";
+import Stack from "@mui/joy/Stack";
+import Typography from "@mui/joy/Typography";
+import Tabs from "@mui/joy/Tabs";
+import TabList from "@mui/joy/TabList";
+import Tab, { tabClasses } from "@mui/joy/Tab";
+import Breadcrumbs from "@mui/joy/Breadcrumbs";
+import Link from "@mui/joy/Link";
+import Card from "@mui/joy/Card";
+import CardActions from "@mui/joy/CardActions";
+import CardOverflow from "@mui/joy/CardOverflow";
+import Alert from "@mui/joy/Alert";
 
-import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
-import ChevronRightRoundedIcon from '@mui/icons-material/ChevronRightRounded';
-import EmailRoundedIcon from '@mui/icons-material/EmailRounded';
-import EditRoundedIcon from '@mui/icons-material/EditRounded';
-import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import FileUpload from './FileUpload';
-import { getUserProfileFromLocalStorage } from '../Utils/getUserProfileFromLocalStorage';
-import { User } from '../Models/User';
+import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
+import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
+import EmailRoundedIcon from "@mui/icons-material/EmailRounded";
+import EditRoundedIcon from "@mui/icons-material/EditRounded";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import FileUpload from "./FileUpload";
+import { getUserProfileFromLocalStorage } from "../Utils/getUserProfileFromLocalStorage";
+import { User } from "../Models/User";
 
 export default function MyProfile() {
-const navigate = useNavigate();
-const user = getUserProfileFromLocalStorage();
+  const navigate = useNavigate();
+  const user = getUserProfileFromLocalStorage();
 
-const [selectedImage, setSelectedImage] = useState<string | null>(localStorage.getItem('profilePictureUrl'));
-const [firstNameInput, setFirstNameInput] = useState<string | null>('');
-const [lastNameInput, setLastNameInput] = useState<string | null>('');
+  const [selectedImage, setSelectedImage] = useState<string | null>(
+    localStorage.getItem("profilePictureUrl")
+  );
+  const [firstNameInput, setFirstNameInput] = useState<string | null>("");
+  const [lastNameInput, setLastNameInput] = useState<string | null>("");
 
   const handleImageChange = (imageUrl: string) => {
     setSelectedImage(imageUrl);
   };
 
-  const updateUser = () =>{
-  let updatedUser = null;
-   if(user) updatedUser = new User (user.userName, user.email, user.token, firstNameInput,  lastNameInput,  selectedImage);
-   localStorage.setItem('profile', JSON.stringify(updatedUser));
-  }
-  
+  const updateUser = () => {
+    let updatedUser = null;
+    if (user)
+      updatedUser = new User(
+        user.userName,
+        user.email,
+        user.token,
+        firstNameInput,
+        lastNameInput,
+        selectedImage
+      );
+    localStorage.setItem("profile", JSON.stringify(updatedUser));
+  };
+
   return (
-    <Box sx={{ flex: 1, width: '100%' }}>
+    <Box sx={{ flex: 1, width: "100%" }}>
       <Box
         sx={{
-          position: 'sticky',
+          position: "sticky",
           top: { sm: -100, md: -110 },
-          bgcolor: 'background.body',
+          bgcolor: "background.body",
           zIndex: 9995,
         }}
       >
@@ -70,7 +80,7 @@ const [lastNameInput, setLastNameInput] = useState<string | null>('');
               color="neutral"
               href="#some-link"
               aria-label="Home"
-              onClick={()=> navigate("/")}
+              onClick={() => navigate("/")}
             >
               <HomeRoundedIcon />
             </Link>
@@ -85,7 +95,7 @@ const [lastNameInput, setLastNameInput] = useState<string | null>('');
         <Tabs
           defaultValue={0}
           sx={{
-            bgcolor: 'transparent',
+            bgcolor: "transparent",
           }}
         >
           <TabList
@@ -93,29 +103,29 @@ const [lastNameInput, setLastNameInput] = useState<string | null>('');
             size="sm"
             sx={{
               pl: { xs: 0, md: 4 },
-              justifyContent: 'left',
+              justifyContent: "left",
               [`&& .${tabClasses.root}`]: {
-                fontWeight: '600',
-                flex: 'initial',
-                color: 'text.tertiary',
+                fontWeight: "600",
+                flex: "initial",
+                color: "text.tertiary",
                 [`&.${tabClasses.selected}`]: {
-                  bgcolor: 'transparent',
-                  color: 'text.primary',
-                  '&::after': {
-                    height: '2px',
-                    bgcolor: 'primary.500',
+                  bgcolor: "transparent",
+                  color: "text.primary",
+                  "&::after": {
+                    height: "2px",
+                    bgcolor: "primary.500",
                   },
                 },
               },
             }}
           >
-            <Tab sx={{ borderRadius: '6px 6px 0 0' }} indicatorInset value={0}>
+            <Tab sx={{ borderRadius: "6px 6px 0 0" }} indicatorInset value={0}>
               Settings
             </Tab>
-            <Tab sx={{ borderRadius: '6px 6px 0 0' }} indicatorInset value={2}>
+            <Tab sx={{ borderRadius: "6px 6px 0 0" }} indicatorInset value={2}>
               Plan
             </Tab>
-            <Tab sx={{ borderRadius: '6px 6px 0 0' }} indicatorInset value={3}>
+            <Tab sx={{ borderRadius: "6px 6px 0 0" }} indicatorInset value={3}>
               Billing
             </Tab>
           </TabList>
@@ -124,9 +134,9 @@ const [lastNameInput, setLastNameInput] = useState<string | null>('');
       <Stack
         spacing={4}
         sx={{
-          display: 'flex',
-          maxWidth: '800px',
-          mx: 'auto',
+          display: "flex",
+          maxWidth: "800px",
+          mx: "auto",
           px: { xs: 2, md: 6 },
           py: { xs: 2, md: 3 },
         }}
@@ -142,35 +152,44 @@ const [lastNameInput, setLastNameInput] = useState<string | null>('');
           <Stack
             direction="row"
             spacing={3}
-            sx={{ display: { xs: 'none', md: 'flex' }, my: 1 }}
+            sx={{ display: { xs: "none", md: "flex" }, my: 1 }}
           >
             <Stack direction="column" spacing={1}>
               <AspectRatio
                 ratio="1"
                 maxHeight={200}
-                sx={{ flex: 1, minWidth: 120, borderRadius: '100%' }}
+                sx={{ flex: 1, minWidth: 120, borderRadius: "100%" }}
               >
-               {selectedImage ? (
-              <img src={selectedImage} loading="lazy" alt="" />
-            ) : (
-              <img
-                src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=286"
-               
-              />
-            )}
+                {selectedImage ? (
+                  <img src={selectedImage} loading="lazy" alt="" />
+                ) : (
+                  <img src="https://imgur.com/gallery/mCHMpLT" />
+                )}
               </AspectRatio>
-                <FileUpload onImageChange={handleImageChange} />
+              <FileUpload onImageChange={handleImageChange} />
             </Stack>
             <Stack spacing={2} sx={{ flexGrow: 1 }}>
               <Stack spacing={1}>
                 <FormLabel>Name</FormLabel>
                 <FormControl
-                  sx={{ display: { sm: 'flex-column', md: 'flex-row' }, gap: 2 }}
+                  sx={{
+                    display: { sm: "flex-column", md: "flex-row" },
+                    gap: 2,
+                  }}
                 >
-                  <Input size="sm" placeholder="First name" onChange={(e)=>setFirstNameInput(e.target.value)} />
-                  </FormControl>
-                  <FormControl>
-                  <Input size="sm" placeholder="Last name" sx={{ flexGrow: 1 }} onChange={(e)=>setLastNameInput(e.target.value)}/>
+                  <Input
+                    size="sm"
+                    placeholder="First name"
+                    onChange={(e) => setFirstNameInput(e.target.value)}
+                  />
+                </FormControl>
+                <FormControl>
+                  <Input
+                    size="sm"
+                    placeholder="Last name"
+                    sx={{ flexGrow: 1 }}
+                    onChange={(e) => setLastNameInput(e.target.value)}
+                  />
                 </FormControl>
               </Stack>
               <Stack direction="row" spacing={2}>
@@ -186,24 +205,21 @@ const [lastNameInput, setLastNameInput] = useState<string | null>('');
                   />
                 </FormControl>
               </Stack>
-             
             </Stack>
           </Stack>
           <Stack
             direction="column"
             spacing={2}
-            sx={{ display: { xs: 'flex', md: 'none' }, my: 1 }}
+            sx={{ display: { xs: "flex", md: "none" }, my: 1 }}
           >
             <Stack direction="row" spacing={2}>
               <Stack direction="column" spacing={1}>
                 <AspectRatio
                   ratio="1"
                   maxHeight={108}
-                  sx={{ flex: 1, minWidth: 108, borderRadius: '100%' }}
+                  sx={{ flex: 1, minWidth: 108, borderRadius: "100%" }}
                 >
-                  <img
-                    src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=286"
-                  />
+                  <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=286" />
                 </AspectRatio>
                 <IconButton
                   aria-label="upload new picture"
@@ -211,13 +227,13 @@ const [lastNameInput, setLastNameInput] = useState<string | null>('');
                   variant="outlined"
                   color="neutral"
                   sx={{
-                    bgcolor: 'background.body',
-                    position: 'absolute',
+                    bgcolor: "background.body",
+                    position: "absolute",
                     zIndex: 2,
-                    borderRadius: '50%',
+                    borderRadius: "50%",
                     left: 85,
                     top: 180,
-                    boxShadow: 'sm',
+                    boxShadow: "sm",
                   }}
                 >
                   <EditRoundedIcon />
@@ -228,15 +244,24 @@ const [lastNameInput, setLastNameInput] = useState<string | null>('');
                 <FormControl
                   sx={{
                     display: {
-                      sm: 'flex-column',
-                      md: 'flex-row',
+                      sm: "flex-column",
+                      md: "flex-row",
                     },
                     gap: 2,
                   }}
-                 ><Input size="sm" placeholder="First name" onChange={(e)=> setFirstNameInput(e.target.value)}/>
-                 </FormControl>
-                 <FormControl>
-                  <Input size="sm" placeholder="Last name" onChange={(e)=> setLastNameInput(e.target.value)}/>
+                >
+                  <Input
+                    size="sm"
+                    placeholder="First name"
+                    onChange={(e) => setFirstNameInput(e.target.value)}
+                  />
+                </FormControl>
+                <FormControl>
+                  <Input
+                    size="sm"
+                    placeholder="Last name"
+                    onChange={(e) => setLastNameInput(e.target.value)}
+                  />
                 </FormControl>
               </Stack>
             </Stack>
@@ -252,18 +277,21 @@ const [lastNameInput, setLastNameInput] = useState<string | null>('');
               />
             </FormControl>
           </Stack>
-          <CardOverflow sx={{ borderTop: '1px solid', borderColor: 'divider' }}>
-            <CardActions sx={{ alignSelf: 'flex-end', pt: 2 }}>
+          <CardOverflow sx={{ borderTop: "1px solid", borderColor: "divider" }}>
+            <CardActions sx={{ alignSelf: "flex-end", pt: 2 }}>
               <Button size="sm" variant="outlined" color="neutral">
                 Cancel
               </Button>
-              <Button size="sm" variant="solid" onClick={()=>{
+              <Button
+                size="sm"
+                variant="solid"
+                onClick={() => {
                   console.log("updated");
                   console.log(user?.profilePictureUrl);
-                  navigate("/")
-                  return updateUser()
-              }
-              }>
+                  navigate("/");
+                  return updateUser();
+                }}
+              >
                 Save
               </Button>
             </CardActions>
@@ -285,12 +313,12 @@ const [lastNameInput, setLastNameInput] = useState<string | null>('');
               sx={{ mt: 1.5 }}
               defaultValue="I'm a software developer based in Bangkok, Thailand. My goal is to solve UI problems with neat CSS without using too much JavaScript."
             />
-            <FormHelperText sx={{ mt: 0.75, fontSize: 'xs' }}>
+            <FormHelperText sx={{ mt: 0.75, fontSize: "xs" }}>
               275 characters left
             </FormHelperText>
           </Stack>
-          <CardOverflow sx={{ borderTop: '1px solid', borderColor: 'divider' }}>
-            <CardActions sx={{ alignSelf: 'flex-end', pt: 2 }}>
+          <CardOverflow sx={{ borderTop: "1px solid", borderColor: "divider" }}>
+            <CardActions sx={{ alignSelf: "flex-end", pt: 2 }}>
               <Button size="sm" variant="outlined" color="neutral">
                 Cancel
               </Button>
@@ -308,14 +336,13 @@ const [lastNameInput, setLastNameInput] = useState<string | null>('');
             </Typography>
           </Box>
           <Divider />
-          <Stack spacing={2} sx={{ my: 1 }}>
-          </Stack>
-          <CardOverflow sx={{ borderTop: '1px solid', borderColor: 'divider' }}>
-            <CardActions sx={{ alignSelf: 'flex-end', pt: 2 }}>
+          <Stack spacing={2} sx={{ my: 1 }}></Stack>
+          <CardOverflow sx={{ borderTop: "1px solid", borderColor: "divider" }}>
+            <CardActions sx={{ alignSelf: "flex-end", pt: 2 }}>
               <Button size="sm" variant="outlined" color="neutral">
                 Cancel
               </Button>
-              <Button size="sm" variant="solid" >
+              <Button size="sm" variant="solid">
                 Save
               </Button>
             </CardActions>
