@@ -1,37 +1,30 @@
+import * as React from 'react';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import CssBaseline from '@mui/material/CssBaseline';
+import TextField from '@mui/material/TextField';
+import Link from '@mui/material/Link';
+import Paper from '@mui/material/Paper';
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Typography from '@mui/material/Typography';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from "axios";
 import backendUrl from "../Secrets/backendurl";
-import React, { useState } from "react";
-import { Form, Button, Container, Alert } from "react-bootstrap";
-import { RegistrationFormData } from "../Models/RegistrationFormData";
 import { useNavigate } from "react-router-dom";
+import DwayneJohnson from '../Images/dwaynejohnson.png';
+
+const defaultTheme = createTheme();
 
 const RegisterComponent: React.FC = () => {
-  const [formData, setFormData] = useState<RegistrationFormData>({
+  const navigate = useNavigate();
+
+  const [formData, setFormData] = React.useState({
     username: "",
     email: "",
     password: "",
   });
-  const [successful, setSuccessful] = useState<boolean>(false);
-  const navigate = useNavigate();
-
-  const registerUser = async (userData: RegistrationFormData) => {
-    try {
-      const response = await axios.post(
-        `${backendUrl}/Auth/Register`,
-        userData
-      );
-      console.log(response.data);
-
-      if (response.status === 201) {
-        setSuccessful(true);
-        setTimeout(() => {
-          navigate("/login");
-        }, 5000);
-      }
-    } catch (error) {
-      console.error("Registration failed", error);
-    }
-  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -41,64 +34,116 @@ const RegisterComponent: React.FC = () => {
     }));
   };
 
+  const registerUser = async (userData: any) => {
+    try {
+      const response = await axios.post(
+        `${backendUrl}/Auth/Register`,
+        userData
+      );
+
+      if (response.status === 201) {
+        navigate("/login");
+      }
+    } catch (error) {
+      console.error("Registration failed", error);
+    }
+  };
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     registerUser(formData);
   };
 
   return (
-    <>
-    <Container className="d-flex justify-content-center align-items-center ">
-      <Form className="w-50" onSubmit={handleSubmit}>
-        <h2 className="mb-3 text-center">Register</h2>
-        <Form.Group className="mb-3" controlId="formUsername">
-          <Form.Label>Username</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="example"
-            name="username"
-            value={formData.username}
-            onChange={handleChange}
-            required
-          />
-        </Form.Group>
-
-        <Form.Group className="mb-3" controlId="formEmail">
-          <Form.Label>Email address</Form.Label>
-          <Form.Control
-            type="email"
-            placeholder="example@example.com"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
-        </Form.Group>
-
-        <Form.Group className="mb-3" controlId="formPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type="password"
-            placeholder="Ex@mple123"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-          />
-        </Form.Group>
-        <div className="text-center">
-          <Button variant="primary" type="submit">
-            Register
-          </Button>
-        </div>
-      </Form>
-    </Container>
-      {successful && (
-        <Alert variant="success">
-          Registration successful! Redirecting to Login page in 5 seconds.
-        </Alert>
-      )}
-    </>
+    <ThemeProvider theme={defaultTheme}>
+      <Grid container component="main" sx={{ height: '100vh' }}>
+        <CssBaseline />
+        <Grid
+  item
+  xs={false}
+  sm={4}
+  md={7}
+  sx={{
+    backgroundImage: `url(${DwayneJohnson})`,
+    backgroundRepeat: 'no-repeat',
+    backgroundColor: (t: any) =>
+      t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
+    backgroundSize: 'cover',
+    backgroundPosition: 'center top', 
+  }}
+/>
+        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+          <Box
+            sx={{
+              my: 8,
+              mx: 4,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
+          >
+            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+              <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              Register
+            </Typography>
+            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="username"
+                label="Username"
+                name="username"
+                autoComplete="username"
+                value={formData.username}
+                onChange={handleChange}
+                autoFocus
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                label="Email Address"
+                name="email"
+                autoComplete="email"
+                value={formData.email}
+                onChange={handleChange}
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+                value={formData.password}
+                onChange={handleChange}
+              />
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+              >
+                Register
+              </Button>
+              <Grid container justifyContent="flex-end">
+                <Grid item>
+                  <Link href="/login" variant="body2">
+                    Already have an account? Sign in
+                  </Link>
+                </Grid>
+              </Grid>
+            </Box>
+          </Box>
+        </Grid>
+      </Grid>
+    </ThemeProvider>
   );
 };
 
