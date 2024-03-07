@@ -42,7 +42,7 @@ const Navigationbar: React.FC = () => {
               <Nav.Link onClick={() => navigate("/products")}>
                 Products
               </Nav.Link>
-              <Nav.Link href="#workout">Workout</Nav.Link>
+              <Nav.Link href="#workout" onClick={()=> navigate("/workout")}>Workout</Nav.Link>
               <Nav.Link href="#healthyfoods">Healthy Foods</Nav.Link>
               <Nav.Link href="#calorie" onClick={()=> navigate("/calories")}>Calorie Counter</Nav.Link>
               <Nav.Link href="#plans">About Us</Nav.Link>

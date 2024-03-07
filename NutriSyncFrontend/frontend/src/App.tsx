@@ -8,6 +8,7 @@ import RegisterComponent from './Components/RegisterComponent';
 import LoginComponent from './Components/LoginComponent';
 import CalorieCounter from './Components/CalorieCounter';
 import MyProfile from './Components/MyProfile';
+import Workout from './Components/WorkoutComponent';
 
 function App() {
 
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
       {
         path: "/myprofile",
         element: <MyProfile />
+      },
+      {
+        path: "/workout",
+        element: <Workout />
       }
     ]
   }
